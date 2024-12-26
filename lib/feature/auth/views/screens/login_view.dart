@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_market/core/functions/navigate_to.dart';
 
-import '../../../core/theming/app_colors.dart';
-import '../../nav_bar/ui/main_home_view.dart';
+import '../../../../core/theming/app_colors.dart';
+import '../../../nav_bar/ui/main_home_view.dart';
 import 'forget_view.dart';
 import 'signin_view.dart';
-import 'widgets/custom_row_with_arrow.dart';
-import 'widgets/custom_text_btn.dart';
-import 'widgets/custom_text_field.dart';
+import '../widgets/custom_row_with_arrow.dart';
+import '../widgets/custom_text_btn.dart';
+import '../widgets/custom_text_field.dart';
 
 
 class LoginView extends StatelessWidget {

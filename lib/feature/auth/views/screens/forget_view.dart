@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/theming/app_colors.dart';
-import 'widgets/custom_elevated_btn.dart';
-import 'widgets/custom_text_field.dart';
+import '../../../../core/theming/app_colors.dart';
+import '../widgets/custom_elevated_btn.dart';
+import '../widgets/custom_text_field.dart';
 
 class ForgotView extends StatelessWidget {
   const ForgotView({super.key});
