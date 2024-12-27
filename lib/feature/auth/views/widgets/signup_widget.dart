@@ -4,22 +4,34 @@ import 'custom_row_with_arrow.dart';
 import 'custom_text_btn.dart';
 import 'custom_text_field.dart';
 
-class SignupWidget extends StatelessWidget {
+class SignupWidget extends StatefulWidget {
   const SignupWidget({super.key});
-  
 
+  @override
+  State<SignupWidget> createState() => _SignupWidgetState();
+}
+
+final formKey = GlobalKey<FormState>();
+final TextEditingController nameController = TextEditingController();
+final TextEditingController passwordController = TextEditingController();
+final TextEditingController emailController = TextEditingController();
+bool isSecured = false;
+
+class _SignupWidgetState extends State<SignupWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomTextFormField(
+        CustomTextFormField(
+          controller: nameController,
           labelText: "Name",
           keyboardType: TextInputType.name,
         ),
         const SizedBox(
           height: 20,
         ),
-        const CustomTextFormField(
+        CustomTextFormField(
+          controller: emailController,
           labelText: "Email",
           keyboardType: TextInputType.emailAddress,
         ),
@@ -27,12 +39,19 @@ class SignupWidget extends StatelessWidget {
           height: 20,
         ),
         CustomTextFormField(
+          controller: passwordController,
           labelText: "Password",
           keyboardType: TextInputType.visiblePassword,
-          isSecured: true,
+          isSecured: !isSecured,
           suffIcon: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.visibility_off),
+            onPressed: () {
+              setState(() {
+                isSecured = !isSecured;
+              });
+            },
+            icon: isSecured
+                ? const Icon(Icons.visibility)
+                : const Icon(Icons.visibility_off),
           ),
         ),
         const SizedBox(
