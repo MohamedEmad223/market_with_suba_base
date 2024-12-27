@@ -1,25 +1,11 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/theming/app_colors.dart';
-import '../widgets/custom_row_with_arrow.dart';
-import '../widgets/custom_text_btn.dart';
-import '../widgets/custom_text_field.dart';
+import '../widgets/signup_widget.dart';
 import '../widgets/welcome_widgets.dart';
 
-class SignupView extends StatefulWidget {
+class SignupView extends StatelessWidget {
   const SignupView({super.key});
 
-  @override
-  State<SignupView> createState() => _SignupViewState();
-}
-
-final TextEditingController _emailController = TextEditingController();
-final TextEditingController _passwordController = TextEditingController();
-final TextEditingController _nameController = TextEditingController();
-
-final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-class _SignupViewState extends State<SignupView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,19 +30,12 @@ class _SignupViewState extends State<SignupView> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: 
+                child: SignupWidget()
               ),
             )
           ],
         ),
       )),
     );
-  }
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _nameController.dispose();
-    super.dispose();
   }
 }
