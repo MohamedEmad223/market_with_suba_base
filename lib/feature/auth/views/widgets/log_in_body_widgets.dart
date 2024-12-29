@@ -19,6 +19,7 @@ final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 bool isSecured = false;
 
+@override
 void dispose() {
   _emailController.dispose();
   _passwordController.dispose();
@@ -97,7 +98,9 @@ class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
                           isSecured = !isSecured;
                         });
                       },
-                      icon:  isSecured ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
+                      icon: isSecured
+                          ? Icon(Icons.visibility)
+                          : Icon(Icons.visibility_off),
                     ),
                   ),
                   const SizedBox(
