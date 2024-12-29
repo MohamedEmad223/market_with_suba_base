@@ -7,12 +7,15 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required this.labelText,
     this.suffIcon,
-    this.isSecured = false, this.keyboardType,
+    this.isSecured = false,
+    this.controller,
+    this.keyboardType,
   });
   final String labelText;
   final Widget? suffIcon;
   final bool isSecured;
   final TextInputType? keyboardType;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -23,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
         }
         return null;
       },
+      controller: controller,
       keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: labelText,
