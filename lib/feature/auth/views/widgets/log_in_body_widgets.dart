@@ -4,6 +4,7 @@ import 'package:my_market/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:my_market/feature/auth/views/widgets/custom_text_field.dart';
 
 import '../../../../core/functions/navigate_to.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../nav_bar/ui/main_home_view.dart';
 import '../screens/forget_view.dart';
 import 'custom_row_with_arrow.dart';
@@ -41,7 +42,36 @@ class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
         padding: const EdgeInsets.all(16.0),
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
-           
+            switch (state) {
+            case LoginLoading():
+              CircularProgressIndicator();
+              break;
+
+            case LoginFailed():
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.error),
+                ),
+              );
+              break;
+
+            case LoginSuccess():
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.home,
+                (route) => false,
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Login Success"),
+                ),
+              );
+              break;
+
+            default:
+              break;
+          }
           },
           builder: (context, state) {
             return Form(
@@ -84,7 +114,14 @@ class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
                   ),
                   CustomRowWithArrowBtn(
                     text: "Login",
-                    onTap: () {},
+                    onTap: () {
+                      if(_fformKey.currentState!.validate()){
+                        authCubit.login(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                        );
+                      }
+                    },
                   ),
                   const SizedBox(
                     height: 20,
