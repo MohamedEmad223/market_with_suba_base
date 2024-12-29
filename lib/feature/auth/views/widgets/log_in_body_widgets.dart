@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_market/feature/auth/logic/cubit/auth_cubit.dart';
 import 'package:my_market/feature/auth/views/widgets/custom_text_field.dart';
 
 import '../../../../core/functions/navigate_to.dart';
@@ -15,7 +17,7 @@ class LogInBodyWidgets extends StatefulWidget {
   State<LogInBodyWidgets> createState() => _LogInBodyWidgetsState();
 }
 
-final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+final GlobalKey<FormState> _fformKey = GlobalKey<FormState>();
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 
@@ -32,64 +34,76 @@ void clear() {
 class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            const CustomTextFormField(
-              labelText: "Email",
-              keyboardType: TextInputType.emailAddress,
-              suffIcon: Icon(Icons.email),
-              
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomTextFormField(
-              keyboardType: TextInputType.visiblePassword,
-              labelText: "Password",
-              isSecured: true,
-              suffIcon: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.visibility_off),
+    AuthCubit authCubit = context.read<AuthCubit>();
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) {
+           
+          },
+          builder: (context, state) {
+            return Form(
+              key: _fformKey,
+              child: Column(
+                children: [
+                  const CustomTextFormField(
+                    labelText: "Email",
+                    keyboardType: TextInputType.emailAddress,
+                    suffIcon: Icon(Icons.email),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomTextFormField(
+                    keyboardType: TextInputType.visiblePassword,
+                    labelText: "Password",
+                    isSecured: true,
+                    suffIcon: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.visibility_off),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      CustomTextButton(
+                        text: "Forgot Password?",
+                        onTap: () {
+                          navigateTo(context, const ForgotView());
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomRowWithArrowBtn(
+                    text: "Login",
+                    onTap: () {},
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomRowWithArrowBtn(
+                    text: "Login With Google",
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainHomeView())),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  DoNotHaveAnAccount()
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CustomTextButton(
-                  text: "Forgot Password?",
-                  onTap: () {
-                    navigateTo(context, const ForgotView());
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomRowWithArrowBtn(
-              text: "Login",
-              onTap: () {},
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            CustomRowWithArrowBtn(
-              text: "Login With Google",
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MainHomeView())),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            DoNotHaveAnAccount()
-          ],
+            );
+          },
         ),
       ),
     );
