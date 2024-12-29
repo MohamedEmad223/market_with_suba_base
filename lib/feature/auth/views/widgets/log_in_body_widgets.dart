@@ -8,65 +8,89 @@ import 'custom_row_with_arrow.dart';
 import 'custom_text_btn.dart';
 import 'do_not_have_an_account.dart';
 
-class LogInBodyWidgets extends StatelessWidget {
+class LogInBodyWidgets extends StatefulWidget {
   const LogInBodyWidgets({super.key});
 
+  @override
+  State<LogInBodyWidgets> createState() => _LogInBodyWidgetsState();
+}
+
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+
+void dispose() {
+  _emailController.dispose();
+  _passwordController.dispose();
+}
+
+void clear() {
+  _emailController.clear();
+  _passwordController.clear();
+}
+
+class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          const CustomTextFormField(
-            labelText: "Email",
-            keyboardType: TextInputType.emailAddress,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          CustomTextFormField(
-            keyboardType: TextInputType.visiblePassword,
-            labelText: "Password",
-            isSecured: true,
-            suffIcon: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.visibility_off),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            const CustomTextFormField(
+              labelText: "Email",
+              keyboardType: TextInputType.emailAddress,
+              suffIcon: Icon(Icons.email),
+              
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              CustomTextButton(
-                text: "Forgot Password?",
-                onTap: () {
-                  navigateTo(context, const ForgotView());
-                },
+            const SizedBox(
+              height: 20,
+            ),
+            CustomTextFormField(
+              keyboardType: TextInputType.visiblePassword,
+              labelText: "Password",
+              isSecured: true,
+              suffIcon: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.visibility_off),
               ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          CustomRowWithArrowBtn(
-            text: "Login",
-            onTap: () {},
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          CustomRowWithArrowBtn(
-            text: "Login With Google",
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => MainHomeView())),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          DoNotHaveAnAccount()
-        ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CustomTextButton(
+                  text: "Forgot Password?",
+                  onTap: () {
+                    navigateTo(context, const ForgotView());
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomRowWithArrowBtn(
+              text: "Login",
+              onTap: () {},
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomRowWithArrowBtn(
+              text: "Login With Google",
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MainHomeView())),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            DoNotHaveAnAccount()
+          ],
+        ),
       ),
     );
   }
