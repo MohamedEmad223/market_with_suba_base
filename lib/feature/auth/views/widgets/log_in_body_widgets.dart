@@ -54,7 +54,7 @@ class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
                 );
                 break;
 
-              case LoginSuccess():
+              case LoginSuccess() || GoogleSignInSuccess():
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -123,10 +123,7 @@ class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
                   ),
                   CustomRowWithArrowBtn(
                     text: "Login With Google",
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainHomeView())),
+                    onTap: () => context.read<AuthCubit>().nativeGoogleSignIn(),
                   ),
                   const SizedBox(
                     height: 20,
