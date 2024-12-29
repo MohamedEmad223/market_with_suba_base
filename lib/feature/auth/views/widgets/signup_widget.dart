@@ -56,7 +56,7 @@ class _SignupWidgetState extends State<SignupWidget> {
               );
               break;
 
-            case SignupSuccess():
+            case SignupSuccess() || GoogleSignInSuccess():
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 Routes.login,
@@ -131,7 +131,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                 ),
                 CustomRowWithArrowBtn(
                   text: "Sign Up With Google",
-                  onTap: () {},
+                  onTap: () => context.read<AuthCubit>().nativeGoogleSignIn(),
                 ),
                 const SizedBox(
                   height: 20,
