@@ -17,6 +17,7 @@ class LogInBodyWidgets extends StatefulWidget {
 
 final TextEditingController _emailController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
+bool isSecured = false;
 
 void dispose() {
   _emailController.dispose();
@@ -57,7 +58,7 @@ class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  MainHomeView(),
+                    builder: (context) => MainHomeView(),
                   ),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -76,7 +77,7 @@ class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
               key: fformKey,
               child: Column(
                 children: [
-                   CustomTextFormField(
+                  CustomTextFormField(
                     controller: _emailController,
                     labelText: "Email",
                     keyboardType: TextInputType.emailAddress,
@@ -89,10 +90,14 @@ class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
                     controller: _passwordController,
                     keyboardType: TextInputType.visiblePassword,
                     labelText: "Password",
-                    isSecured: true,
+                    isSecured: !isSecured,
                     suffIcon: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          isSecured = !isSecured;
+                        });
+                      },
+                      icon:  isSecured ? Icon(Icons.visibility) : Icon(Icons.visibility_off),
                     ),
                   ),
                   const SizedBox(
