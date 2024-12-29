@@ -15,7 +15,6 @@ class SignupWidget extends StatefulWidget {
 }
 
 class _SignupWidgetState extends State<SignupWidget> {
-  final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -37,6 +36,8 @@ class _SignupWidgetState extends State<SignupWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+
     return BlocProvider(
       create: (context) => AuthCubit(),
       child: BlocConsumer<AuthCubit, AuthState>(
@@ -61,6 +62,11 @@ class _SignupWidgetState extends State<SignupWidget> {
                 Routes.login,
                 (route) => false,
               );
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Sign Up Success"),
+                ),
+              );
               break;
 
             default:
@@ -69,7 +75,7 @@ class _SignupWidgetState extends State<SignupWidget> {
         },
         builder: (context, state) {
           return Form(
-            key: _formKey,
+            key: formKey,
             child: Column(
               children: [
                 CustomTextFormField(
@@ -111,7 +117,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                 CustomRowWithArrowBtn(
                   text: "Sign Up",
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (formKey.currentState!.validate()) {
                       BlocProvider.of<AuthCubit>(context).signUp(
                         name: _nameController.text,
                         email: _emailController.text,
