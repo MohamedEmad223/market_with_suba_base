@@ -4,8 +4,8 @@ import 'package:my_market/feature/auth/views/widgets/custom_text_field.dart';
 
 import '../../../../core/routes/routes.dart';
 import '../../logic/cubit/auth_cubit.dart';
+import 'already_have_an_account_widget.dart';
 import 'custom_row_with_arrow.dart';
-import 'custom_text_btn.dart';
 
 class SignupWidget extends StatefulWidget {
   const SignupWidget({super.key});
@@ -136,27 +136,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Already Have an account?",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    CustomTextButton(
-                      text: "Login",
-                      onTap: () {
-                        Navigator.pushNamed(context, Routes.login);
-                      },
-                    ),
-                  ],
-                )
+                AlreadyHaveAnAccountWidget()
               ],
             ),
           );
