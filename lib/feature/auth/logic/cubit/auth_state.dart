@@ -22,3 +22,12 @@ final class SignupFailed extends AuthState {
   final String error;
   SignupFailed(this.error);
 }
+
+final class GoogleSignInLoading extends AuthState {}
+
+final class GoogleSignInSuccess extends AuthState {}
+
+final class GoogleSignInFailed extends AuthState {
+
+  GoogleSignInFailed();
+}

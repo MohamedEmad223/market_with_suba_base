@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'auth_state.dart';
@@ -23,7 +24,10 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> signUp({required String name,required String email,required String password}) async {
+  Future<void> signUp(
+      {required String name,
+      required String email,
+      required String password}) async {
     emit(SignupLoading());
     try {
       await client.auth.signUp(email: email, password: password);
@@ -34,5 +38,37 @@ class AuthCubit extends Cubit<AuthState> {
       log(e.toString());
       emit(SignupFailed(e.toString()));
     }
+  }
+
+  GoogleSignInAccount? googleUser;
+  Future<AuthResponse> nativeGoogleSignIn() async {
+    emit(GoogleSignInLoading());
+    const webClientId =
+        '413135974201-tjr57ln3kbcln00flrs4b282gpk525e2.apps.googleusercontent.com';
+
+    final GoogleSignIn googleSignIn = GoogleSignIn(
+      serverClientId: webClientId,
+    );
+    if (googleUser == null) {
+      return AuthResponse();
+    }
+
+    googleUser = await googleSignIn.signIn();
+    final googleAuth = await googleUser!.authentication;
+    final accessToken = googleAuth.accessToken;
+    final idToken = googleAuth.idToken;
+
+    if (accessToken == null || idToken == null) {
+      emit(GoogleSignInFailed());
+      return AuthResponse();
+    }
+
+    AuthResponse response = await client.auth.signInWithIdToken(
+      provider: OAuthProvider.google,
+      idToken: idToken,
+      accessToken: accessToken,
+    );
+    emit(GoogleSignInSuccess());
+    return response;
   }
 }
