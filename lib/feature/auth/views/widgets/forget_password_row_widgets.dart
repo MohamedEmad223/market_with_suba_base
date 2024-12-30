@@ -15,7 +15,7 @@ class ForgetPasswordRowWidgets extends StatelessWidget {
         CustomTextButton(
           text: "Forgot Password?",
           onTap: () {
-            navigateTo(context, const ForgotView());
+            navigateTo(context, const ResetPasswordView());
           },
         ),
       ],
