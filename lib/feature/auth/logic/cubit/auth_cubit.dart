@@ -18,6 +18,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(LoginLoading());
     try {
       await client.auth.signInWithPassword(email: email, password: password);
+      await getUserData();
       emit(LoginSuccess());
     } on AuthException catch (e) {
       emit(LoginFailed(e.message));
@@ -35,6 +36,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await client.auth.signUp(email: email, password: password);
       await addUserData(name: name, email: email);
+      await getUserData();
       emit(SignupSuccess());
     } on AuthException catch (e) {
       emit(SignupFailed(e.message));
@@ -73,6 +75,7 @@ class AuthCubit extends Cubit<AuthState> {
       accessToken: accessToken,
     );
     await addUserData(name: googleUser!.displayName!, email: googleUser!.email);
+    await getUserData();
     emit(GoogleSignInSuccess());
     return response;
   }
@@ -90,5 +93,20 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  UserDataModel? userDataModel;
+  Future<void> getUserData() async {
+    emit(GetUserDataLoading());
+    try {
+      var data = await client
+          .from(AppConstsnts.usersColumn)
+          .select()
+          .eq("user_id", client.auth.currentUser!.id);
 
+      userDataModel = UserDataModel.fromJson(data.first);
+      emit(GetUserDataSuccess(userDataModel!));
+    } catch (e) {
+      log(e.toString());
+      emit(GetUserDataFailed(e.toString()));
+    }
+  }
 }
