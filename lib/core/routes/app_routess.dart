@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_market/feature/auth/views/screens/signin_view.dart';
-import 'package:my_market/feature/profile/logic/cubit/logout_cubit.dart';
 
 import '../../feature/auth/views/screens/login_view.dart';
 import '../../feature/nav_bar/ui/main_home_view.dart';
@@ -22,11 +20,7 @@ class AppRoutes {
       case Routes.home:
         return PageRoutes(builder: (context) => MainHomeView());
       case Routes.profile:
-        return PageRoutes(
-            builder: (context) => BlocProvider(
-                  create: (context) => LogoutCubit(),
-                  child: const ProfileView(),
-                ));
+        return PageRoutes(builder: (context) => const ProfileView());
       default:
         return null;
     }
