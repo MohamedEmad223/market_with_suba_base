@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../core/constants/app_constsnts.dart';
+import '../../data/models/user_data_model.dart';
 
 part 'auth_state.dart';
 
@@ -89,5 +90,5 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  
+
 }
