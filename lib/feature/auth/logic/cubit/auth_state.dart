@@ -40,3 +40,15 @@ final class AddUserDataFailed extends AuthState {
   final String error;
   AddUserDataFailed(this.error);
 }
+
+final class GetUserDataLoading extends AuthState {}
+
+final class GetUserDataSuccess extends AuthState {
+  final UserDataModel userDataModel;
+  GetUserDataSuccess(this.userDataModel);
+}
+
+final class GetUserDataFailed extends AuthState {
+  final String error;
+  GetUserDataFailed(this.error);
+}
