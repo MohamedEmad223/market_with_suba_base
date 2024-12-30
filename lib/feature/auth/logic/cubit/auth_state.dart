@@ -31,3 +31,12 @@ final class GoogleSignInFailed extends AuthState {
 
   GoogleSignInFailed();
 }
+
+final class AddUserDataLoading extends AuthState {}
+
+final class AddUserDataSuccess extends AuthState {}
+
+final class AddUserDataFailed extends AuthState {
+  final String error;
+  AddUserDataFailed(this.error);
+}
