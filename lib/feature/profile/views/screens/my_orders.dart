@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/widgets/products_list.dart';
-import '../../../core/functions/build_appbar.dart';
+import '../../../../core/widgets/products_list.dart';
+import '../../../../core/functions/build_appbar.dart';
 
 
 class MyOrdersViwe extends StatelessWidget {

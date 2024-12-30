@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../core/functions/build_appbar.dart';
-import '../../auth/views/widgets/custom_elevated_btn.dart';
-import '../../auth/views/widgets/custom_text_field.dart';
+import '../../../../core/functions/build_appbar.dart';
+import '../../../auth/views/widgets/custom_elevated_btn.dart';
+import '../../../auth/views/widgets/custom_text_field.dart';
 
 class EditNameView extends StatelessWidget {
   const EditNameView({super.key});
