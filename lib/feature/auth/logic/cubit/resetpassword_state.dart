@@ -14,4 +14,6 @@ final class ResetpasswordFailed extends ResetpasswordState {
   ResetpasswordFailed(this.error);
 }
 
+final class ResetpasswordSuccess extends ResetpasswordState {}
+
 
