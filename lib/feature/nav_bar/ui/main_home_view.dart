@@ -6,7 +6,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import '../../../core/theming/app_colors.dart';
 import '../../favorite/ui/favorite_view.dart';
 import '../../home/ui/home_view.dart';
-import '../../profile/ui/profile_view.dart';
+import '../../profile/views/screens/profile_view.dart';
 import '../../store/ui/store_view.dart';
 import '../logic/cubit/nav_bar_cubit.dart';
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_market/core/functions/navigate_to.dart';
-import 'package:my_market/feature/profile/ui/edit_name_view.dart';
-import 'package:my_market/feature/profile/ui/my_orders.dart';
-import 'package:my_market/feature/profile/ui/widgets/custom_row_btn.dart';
+import 'package:my_market/feature/profile/views/screens/edit_name_view.dart';
+import 'package:my_market/feature/profile/views/screens/my_orders.dart';
+import 'package:my_market/feature/profile/views/widgets/custom_row_btn.dart';
 
-import '../../../core/theming/app_colors.dart';
+import '../../../../core/theming/app_colors.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
