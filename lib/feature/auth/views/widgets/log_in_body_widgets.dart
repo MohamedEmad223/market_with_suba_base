@@ -47,7 +47,7 @@ class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
                 break;
 
               case LoginFailed():
-                Navigator.pop(context);
+               
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(state.error),

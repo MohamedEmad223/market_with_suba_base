@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_market/feature/auth/views/screens/signin_view.dart';
 
+import '../../feature/auth/views/screens/reset_password_view.dart';
 import '../../feature/auth/views/screens/login_view.dart';
 import '../../feature/nav_bar/ui/main_home_view.dart';
 import '../../feature/profile/views/screens/profile_view.dart';
@@ -19,6 +20,9 @@ class AppRoutes {
         return PageRoutes(builder: (context) => const SignupView());
       case Routes.home:
         return PageRoutes(builder: (context) => MainHomeView());
+      case Routes.resetPassword:
+        return PageRoutes(
+            builder: (context) => ResetPasswordView());
       case Routes.profile:
         return PageRoutes(builder: (context) => const ProfileView());
       default:
