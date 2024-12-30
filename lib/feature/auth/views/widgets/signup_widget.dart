@@ -56,7 +56,18 @@ class _SignupWidgetState extends State<SignupWidget> {
               );
               break;
 
-            case SignupSuccess() || GoogleSignInSuccess():
+            case SignupSuccess():
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.login,
+                (route) => false,
+              );
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Sign Up Success"),
+                ),
+              );
+            case GoogleSignInSuccess():
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 Routes.login,
