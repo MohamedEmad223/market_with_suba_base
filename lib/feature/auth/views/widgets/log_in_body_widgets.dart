@@ -55,7 +55,19 @@ class _LogInBodyWidgetsState extends State<LogInBodyWidgets> {
                 );
                 break;
 
-              case LoginSuccess() || GoogleSignInSuccess():
+              case LoginSuccess():
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MainHomeView(),
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Login Success"),
+                  ),
+                );
+              case GoogleSignInSuccess():
                 Navigator.push(
                   context,
                   MaterialPageRoute(
