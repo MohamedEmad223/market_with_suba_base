@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/functions/navigate_to.dart';
-import '../screens/forget_view.dart';
+import '../screens/reset_password_view.dart';
 import 'custom_text_btn.dart';
 
 class ForgetPasswordRowWidgets extends StatelessWidget {
@@ -15,7 +15,7 @@ class ForgetPasswordRowWidgets extends StatelessWidget {
         CustomTextButton(
           text: "Forgot Password?",
           onTap: () {
-            navigateTo(context, const ResetPasswordView());
+            navigateTo(context,  ResetPasswordView());
           },
         ),
       ],

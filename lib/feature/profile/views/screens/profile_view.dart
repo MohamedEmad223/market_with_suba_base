@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_market/core/functions/navigate_to.dart';
-import 'package:my_market/feature/auth/views/screens/login_view.dart';
 import 'package:my_market/feature/profile/logic/cubit/logout_cubit.dart';
 import 'package:my_market/feature/profile/views/screens/edit_name_view.dart';
 import 'package:my_market/feature/profile/views/screens/my_orders.dart';
 import 'package:my_market/feature/profile/views/widgets/custom_row_btn.dart';
 
 import '../../../../core/functions/show_msg.dart';
+import '../../../../core/routes/routes.dart';
 import '../../../../core/theming/app_colors.dart';
 
 class ProfileView extends StatelessWidget {
@@ -81,10 +81,8 @@ class ProfileView extends StatelessWidget {
                             child: BlocConsumer<LogoutCubit, LogoutState>(
                               listener: (context, state) {
                                 if (state is LogoutSuccess) {
-                                  Navigator.pushReplacement(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return const LoginView();
-                                  }));
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context, Routes.login, (route) => false);
                                 }
                                 if (state is LogoutFailed) {
                                   showMsg(context, state.error);
